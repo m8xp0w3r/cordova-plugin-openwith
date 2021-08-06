@@ -152,13 +152,20 @@
                 else {
                     uti = SHAREEXT_UNIFORM_TYPE_IDENTIFIER;
                 }
+
+                NSURL* fileUrl;
+                if([(NSObject*)item isKindOfClass:[NSURL class]]) {
+                    fileUrl = (NSURL*)item;
+                }
+
                 NSDictionary *dict = @{
                     @"text": self.contentText,
                     @"backURL": self.backURL,
                     @"data" : data,
                     @"uti": uti,
                     @"utis": utis,
-                    @"name": suggestedName
+                    @"name": suggestedName,
+                    @"path": fileUrl.absoluteString
                 };
                 [self.userDefaults setObject:dict forKey:@"image"];
                 [self.userDefaults synchronize];
